@@ -25,20 +25,57 @@ class MyRiveAnimation extends StatelessWidget {
     return Scaffold(
       body: const Center(
         child: SizedBox(
-          height: 300,
+          height: 400,
           child: AspectRatio(
             aspectRatio: 3 / 4,
             child: SpriteWidget(),
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.arrow_upward),
-        onPressed: () => context.read<SpriteBloc>().add(
-              const ButtonPressedSpriteEvent(
-                buttonType: ButtonType.jump,
-              ),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomRight,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton(
+              child: const Icon(Icons.arrow_upward),
+              onPressed: () => context.read<SpriteBloc>().add(
+                    const ButtonPressedSpriteEvent(
+                      buttonType: ButtonType.jump,
+                    ),
+                  ),
             ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FloatingActionButton(
+                  child: const Text('S'),
+                  onPressed: () => context.read<SpriteBloc>().add(
+                        const ButtonPressedSpriteEvent(
+                          buttonType: ButtonType.stop,
+                        ),
+                      ),
+                ),
+                FloatingActionButton(
+                  child: const Icon(Icons.arrow_forward),
+                  onPressed: () => context.read<SpriteBloc>().add(
+                        const ButtonPressedSpriteEvent(
+                          buttonType: ButtonType.walk,
+                        ),
+                      ),
+                ),
+                FloatingActionButton(
+                  child: const Icon(Icons.arrow_forward_ios),
+                  onPressed: () => context.read<SpriteBloc>().add(
+                        const ButtonPressedSpriteEvent(
+                          buttonType: ButtonType.run,
+                        ),
+                      ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -10,15 +10,17 @@ class FootballerSpriteUseCase implements SpriteUseCase {
 
   final String asset;
 
-  SMIInput<bool>? _input;
+  SMIInput<bool>? _jumpInput;
+  SMIInput<double>? _speedInput;
   Artboard? _artBoard;
 
   @override
   Artboard? get artBoard => _artBoard;
 
-  static const _stateMachine = 'FootballerStateMachine';
+  static const _stateMachine = 'State Machine';
 
-  static const _jumpInput = 'Jump';
+  static const _jumpInputString = 'Jump';
+  static const _speedInputString = 'Speed';
 
   @override
   Future<bool> init() async {
@@ -35,7 +37,9 @@ class FootballerSpriteUseCase implements SpriteUseCase {
       if (controller != null) {
         controller.isActive = true;
         _artBoard?.addController(controller);
-        _input = controller.findInput(_jumpInput);
+        _jumpInput = controller.findInput<bool>(_jumpInputString);
+        _speedInput = controller.findInput<double>(_speedInputString);
+        _speedInput?.value = 0.0;
         return true;
       }
     }
@@ -47,11 +51,16 @@ class FootballerSpriteUseCase implements SpriteUseCase {
   void buttonPressed(ButtonType type) {
     switch (type) {
       case ButtonType.walk:
+        _speedInput?.value = 1.0;
         break;
       case ButtonType.run:
+        _speedInput?.value = 2.0;
         break;
       case ButtonType.jump:
-        _input?.value = true;
+        _jumpInput?.value = true;
+        break;
+      case ButtonType.stop:
+        _speedInput?.value = 0.0;
         break;
     }
   }
