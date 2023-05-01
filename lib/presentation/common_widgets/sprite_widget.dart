@@ -26,7 +26,6 @@ class SpriteWidget extends StatelessWidget {
 
 class _Rive extends StatelessWidget {
   const _Rive({
-    super.key,
     required this.readyState,
   });
 

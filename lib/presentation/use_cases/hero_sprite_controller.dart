@@ -1,10 +1,11 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
-import 'package:rive_demo/domain/use_cases/sprite_use_case.dart';
+import 'package:rive_demo/domain/controllers/sprite_controller.dart';
 import 'package:rive_demo/internal/button_type.dart';
 
-class FootballerSpriteUseCase implements SpriteUseCase {
-  FootballerSpriteUseCase({
+class HeroSpriteController implements SpriteController {
+  HeroSpriteController({
     required this.asset,
   });
 
@@ -12,39 +13,38 @@ class FootballerSpriteUseCase implements SpriteUseCase {
 
   SMIInput<bool>? _jumpInput;
   SMIInput<double>? _speedInput;
-  Artboard? _artBoard;
 
-  @override
-  Artboard? get artBoard => _artBoard;
-
-  static const _stateMachine = 'State Machine';
+  static const _stateMachineName = 'State Machine';
 
   static const _jumpInputString = 'Jump';
   static const _speedInputString = 'Speed';
 
   @override
-  Future<bool> init() async {
+  Future<Option<Artboard>> init() async {
     final data = await rootBundle.load(asset);
     final file = RiveFile.import(data);
-    _artBoard = file.mainArtboard;
 
-    if (_artBoard != null) {
+    try {
+      Artboard artBoard = file.mainArtboard;
+
       final controller = StateMachineController.fromArtboard(
-        _artBoard!,
-        _stateMachine,
+        artBoard,
+        _stateMachineName,
       );
 
       if (controller != null) {
         controller.isActive = true;
-        _artBoard?.addController(controller);
+        artBoard.addController(controller);
         _jumpInput = controller.findInput<bool>(_jumpInputString);
         _speedInput = controller.findInput<double>(_speedInputString);
         _speedInput?.value = 0.0;
-        return true;
+        return some(artBoard);
       }
+    } on StateError catch (_) {
+      return none();
     }
 
-    return false;
+    return none();
   }
 
   @override

@@ -3,6 +3,7 @@ part of 'sprite_bloc.dart';
 abstract class SpriteState extends Equatable {
   const SpriteState();
 
+  //TODO: make abstract
   bool get isLoading => false;
   bool get isError => false;
 
@@ -24,17 +25,6 @@ class SpriteLoadingState extends SpriteState {
   bool get isLoading => true;
 }
 
-class SpriteReadyState extends SpriteState {
-  const SpriteReadyState({
-    required this.artBoard,
-  });
-
-  final Artboard artBoard;
-
-  @override
-  List<Object> get props => [artBoard];
-}
-
 class SpriteErrorState extends SpriteState {
   const SpriteErrorState({
     required this.message,
@@ -47,4 +37,15 @@ class SpriteErrorState extends SpriteState {
 
   @override
   List<Object> get props => [message];
+}
+
+class SpriteReadyState extends SpriteState {
+  const SpriteReadyState({
+    required this.artBoard,
+  });
+
+  final Artboard artBoard;
+
+  @override
+  List<Object> get props => [artBoard];
 }
