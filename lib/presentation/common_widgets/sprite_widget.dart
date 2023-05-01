@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 import 'package:rive_demo/presentation/bloc/sprite/sprite_bloc.dart';
 
+// Shows Widget according to Sprite Bloc state
 class SpriteWidget extends StatelessWidget {
   const SpriteWidget({
     super.key,
@@ -12,13 +13,17 @@ class SpriteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SpriteBloc, SpriteState>(
       builder: (_, state) {
-        return state.isLoading
-            ? const SizedBox()
-            : state.isError
-                ? const Text('Error')
-                : _Rive(
-                    readyState: state as SpriteReadyState,
-                  );
+        if (state is SpriteReadyState) {
+          return _Rive(
+            readyState: state,
+          );
+        } else if (state is SpriteLoadingState || state is SpriteInitialState) {
+          return const SizedBox();
+        } else if (state is SpriteErrorState) {
+          return Text(state.message);
+        }
+
+        return const Text('Unknown Error');
       },
     );
   }

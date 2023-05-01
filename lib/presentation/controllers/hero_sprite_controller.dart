@@ -4,6 +4,7 @@ import 'package:rive/rive.dart';
 import 'package:rive_demo/domain/controllers/sprite_controller.dart';
 import 'package:rive_demo/internal/button_type.dart';
 
+// Controller implementation for Footballer Sprite
 class HeroSpriteController implements SpriteController {
   HeroSpriteController({
     required this.asset,

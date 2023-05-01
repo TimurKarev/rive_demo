@@ -9,6 +9,7 @@ import 'package:rive_demo/internal/button_type.dart';
 part 'sprite_event.dart';
 part 'sprite_state.dart';
 
+// Bloc for Sprite state management, argument is controller for control exact type of Sprite
 class SpriteBloc extends Bloc<SpriteEvent, SpriteState> {
   SpriteBloc({
     required SpriteController spriteController,
@@ -39,6 +40,7 @@ class SpriteBloc extends Bloc<SpriteEvent, SpriteState> {
     );
   }
 
+  // TODO: Move tracking buttons to separate Bloc
   Future<void> _onButtonPressed(
     ButtonPressedSpriteEvent event,
     Emitter<SpriteState> emitter,

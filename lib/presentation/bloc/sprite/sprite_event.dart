@@ -12,6 +12,7 @@ class StartedSpriteEvent extends SpriteEvent {
   const StartedSpriteEvent();
 }
 
+// TODO: Move to GameController Bloc (not exist)
 // Button pressed event
 class ButtonPressedSpriteEvent extends SpriteEvent {
   const ButtonPressedSpriteEvent({

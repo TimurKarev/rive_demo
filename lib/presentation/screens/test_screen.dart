@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive_demo/presentation/bloc/sprite/sprite_bloc.dart';
 import 'package:rive_demo/presentation/common_widgets/game_controller_widget.dart';
 import 'package:rive_demo/presentation/common_widgets/sprite_widget.dart';
-import 'package:rive_demo/presentation/use_cases/hero_sprite_controller.dart';
+import 'package:rive_demo/presentation/controllers/hero_sprite_controller.dart';
 
 // Screen with sprite and controller, loads on start
 class TestScreen extends StatelessWidget {

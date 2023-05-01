@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive_demo/internal/button_type.dart';
 import 'package:rive_demo/presentation/bloc/sprite/sprite_bloc.dart';
 
+// TODO: need deep refactor
+// Widget with game controller
 class GameControllerWidget extends StatelessWidget {
   const GameControllerWidget({
     super.key,

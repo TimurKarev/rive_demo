@@ -3,26 +3,17 @@ part of 'sprite_bloc.dart';
 abstract class SpriteState extends Equatable {
   const SpriteState();
 
-  //TODO: make abstract
-  bool get isLoading => false;
-  bool get isError => false;
-
   @override
   List<Object> get props => [];
 }
 
+// Initial state needs for constructor only
 class SpriteInitialState extends SpriteState {
   const SpriteInitialState();
-
-  @override
-  bool get isLoading => true;
 }
 
 class SpriteLoadingState extends SpriteState {
   const SpriteLoadingState();
-
-  @override
-  bool get isLoading => true;
 }
 
 class SpriteErrorState extends SpriteState {
@@ -33,12 +24,10 @@ class SpriteErrorState extends SpriteState {
   final String message;
 
   @override
-  bool get isError => true;
-
-  @override
   List<Object> get props => [message];
 }
 
+// If Sprite controller successfully initialized argument is artBoard for UI Rive widget
 class SpriteReadyState extends SpriteState {
   const SpriteReadyState({
     required this.artBoard,
